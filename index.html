@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Millet </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .header p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .card ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        .card ul li {
+            padding: 8px 0;
+            color: #555;
+            border-bottom: 1px solid #eee;
+        }
+        .card ul li:last-child {
+            border-bottom: none;
+        }
+        .card ul li::before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.2s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #28a745;
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .tech-stack {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+        .tech-stack h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .tech-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .tech-item strong {
+            display: block;
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+        .tech-item span {
+            color: #666;
+            font-size: 14px;
+        }
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        .api-endpoint {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌾 Farm Millet </h1>
+            <p>Complete Backend API for Supply Chain & Marketplace</p>
+        </div>
+
+        <div class="tech-stack">
+            <h2>Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <strong>PHP 8+</strong>
+                    <span>Pure PHP Backend</span>
+                </div>
+                <div class="tech-item">
+                    <strong>MySQL</strong>
+                    <span>InnoDB Engine</span>
+                </div>
+                <div class="tech-item">
+                    <strong>JWT</strong>
+                    <span>Authentication</span>
+                </div>
+                <div class="tech-item">
+                    <strong>PHPMailer</strong>
+                    <span>SMTP Email</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Razorpay</strong>
+                    <span>Payment Gateway</span>
+                </div>
+                <div class="tech-item">
+                    <strong>PDO</strong>
+                    <span>Database Security</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <span class="status-badge">READY</span>
+                <h2>🚀 Quick Start</h2>
+                <p>Get started with the backend in minutes</p>
+                <ul>
+                    <li>Composer dependencies installed</li>
+                    <li>Database schema ready</li>
+                    <li>Environment configured</li>
+                    <li>API routes defined</li>
+                </ul>
+                <a href="test.php" class="btn">Test Connection</a>
+            </div>
+
+            <div class="card">
+                <h2>📚 Documentation</h2>
+                <p>Complete guides and references</p>
+                <ul>
+                    <li>Setup Guide</li>
+                    <li>API Testing Examples</li>
+                    <li>Project Structure</li>
+                    <li>Quick Start Guide</li>
+                </ul>
+                <a href="QUICKSTART.md" class="btn btn-secondary">View Docs</a>
+            </div>
+
+            <div class="card">
+                <h2>🔐 User Roles</h2>
+                <p>Three distinct user types</p>
+                <ul>
+                    <li>Farmer - Supply Management</li>
+                    <li>SHG/FPO - Processing & Sales</li>
+                    <li>Consumer - Orders & Tracking</li>
+                </ul>
+                <a href="API_TESTING.md" class="btn btn-secondary">API Examples</a>
+            </div>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <h2>✨ Features</h2>
+                <ul>
+                    <li>OTP-based registration</li>
+                    <li>Email verification (SMTP)</li>
+                    <li>JWT authentication</li>
+                    <li>Supply chain tracking</li>
+                    <li>Traceability records</li>
+                    <li>Order management</li>
+                    <li>Payment integration</li>
+                    <li>Status timeline</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>🛡️ Security</h2>
+                <ul>
+                    <li>Password hashing</li>
+                    <li>SQL injection prevention</li>
+                    <li>Input validation</li>
+                    <li>Role-based access</li>
+                    <li>JWT middleware</li>
+                    <li>HTTPS ready</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>📊 Database</h2>
+                <ul>
+                    <li>12 optimized tables</li>
+                    <li>Foreign key constraints</li>
+                    <li>Indexed queries</li>
+                    <li>InnoDB engine</li>
+                    <li>UTF-8 support</li>
+                    <li>Extensible schema</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tech-stack">
+            <h2>API Base URL</h2>
+            <div class="api-endpoint">
+                http://localhost/Millets/api/
+            </div>
+            <p style="text-align: center; color: #666; margin-top: 15px;">
+                All endpoints return JSON responses
+            </p>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <h2>🌾 Farmer APIs</h2>
+                <p>Supply management and analytics</p>
+                <div class="api-endpoint" style="font-size: 12px;">
+POST /api/farmer/supply
+GET  /api/farmer/supply
+GET  /api/farmer/payment-history
+GET  /api/farmer/sales-summary
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🏢 SHG/FPO APIs</h2>
+                <p>Processing and product management</p>
+                <div class="api-endpoint" style="font-size: 12px;">
+GET  /api/shg/supply
+PUT  /api/shg/supply/accept/{id}
+POST /api/shg/product
+PUT  /api/shg/order/status/{id}
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🛒 Consumer APIs</h2>
+                <p>Shopping and order tracking</p>
+                <div class="api-endpoint" style="font-size: 12px;">
+GET  /api/consumer/products
+POST /api/consumer/order
+GET  /api/consumer/order
+GET  /api/consumer/order/{id}/track
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Millet Marketplace Backend</strong></p>
+            <p>Production-ready • Copy-paste ready • Fully documented</p>
+            <p style="margin-top: 20px; opacity: 0.8;">Built with Pure PHP 8+ & MySQL</p>
+        </div>
+    </div>
+</body>
+</html>

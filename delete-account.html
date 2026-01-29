@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Account - FarmMillet</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            width: 420px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #2e7d32;
+        }
+
+        input, textarea {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+        }
+
+        button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h2>Delete Your FarmMillet Account</h2>
+    <p>
+        We’re sorry to see you go. Please submit the form below to request
+        permanent deletion of your FarmMillet account and data.
+    </p>
+
+    <form onsubmit="return handleDelete(event)">
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Registered Email" required>
+        <input type="text" placeholder="Phone Number" required>
+        <textarea placeholder="Reason for leaving (optional)"></textarea>
+        <button type="submit">Delete My Account</button>
+    </form>
+</div>
+
+<script>
+    function handleDelete(event) {
+        event.preventDefault();
+        document.body.innerHTML =
+            "<h1 style='text-align:center;margin-top:20%;font-family:Arial;'>Your account deletion request has been received.<br/>We will process it shortly.</h1>";
+    }
+</script>
+
+</body>
+</html>
