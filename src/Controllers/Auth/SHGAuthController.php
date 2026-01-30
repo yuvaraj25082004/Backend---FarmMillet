@@ -15,7 +15,7 @@ class SHGAuthController
      */
     public static function register(): void
     {
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         // Validate required fields
         $requiredFields = ['organization_name', 'contact_person_name', 'email', 'mobile', 'password', 'street', 'city', 'pincode'];
@@ -129,7 +129,7 @@ class SHGAuthController
      */
     public static function verifyOTP(): void
     {
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         $errors = Validator::required($data, ['email', 'otp']);
         if (!empty($errors)) {
@@ -148,7 +148,7 @@ class SHGAuthController
      */
     public static function login(): void
     {
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         $errors = Validator::required($data, ['email', 'password']);
         if (!empty($errors)) {
@@ -159,7 +159,7 @@ class SHGAuthController
             $db = Database::getConnection();
 
             $stmt = $db->prepare("
-                SELECT u.id, u.email, u.password, u.role, u.is_verified, u.is_active,
+                SELECT u.id, u.email, u.password, u.role, u.is_verified, u.is_active,u.mobile,
                        s.organization_name, s.contact_person_name, s.street, s.city, s.pincode
                 FROM users u
                 LEFT JOIN shg_profiles s ON u.id = s.user_id
@@ -186,7 +186,9 @@ class SHGAuthController
                 'user_id' => $user['id'],
                 'email' => $user['email'],
                 'role' => $user['role'],
-                'organization_name' => $user['organization_name']
+                'name' => $user['contact_person_name'],
+                'organization_name' => $user['organization_name'],
+                'mobile' => $user['mobile']
             ]);
 
             Response::success('Login successful', [
@@ -196,6 +198,7 @@ class SHGAuthController
                     'email' => $user['email'],
                     'role' => $user['role'],
                     'name' => $user['contact_person_name'],
+                    'mobile' => $user['mobile'],
                     'organization_name' => $user['organization_name'],
                     'contact_person_name' => $user['contact_person_name'],
                     'street' => $user['street'],
@@ -215,7 +218,7 @@ class SHGAuthController
      */
     public static function forgotPassword(): void
     {
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         $errors = Validator::required($data, ['email']);
         if (!empty($errors)) {
@@ -251,7 +254,7 @@ class SHGAuthController
      */
     public static function resetPassword(): void
     {
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         $errors = Validator::required($data, ['email', 'otp', 'new_password']);
         if (!empty($errors)) {

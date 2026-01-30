@@ -68,7 +68,7 @@ class Validator
     /**
      * Validate required fields
      */
-    public static function required(array $data, array $fields): array
+    public static function required(?array $data, array $fields): array
     {
         $errors = [];
 

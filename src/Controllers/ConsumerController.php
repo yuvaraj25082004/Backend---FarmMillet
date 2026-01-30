@@ -88,7 +88,7 @@ class ConsumerController
     public static function placeOrder(): void
     {
         $user = AuthMiddleware::consumer();
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         $requiredFields = ['items', 'dropoff_location'];
         $errors = Validator::required($data, $requiredFields);

@@ -15,7 +15,7 @@ class ConsumerAuthController
      */
     public static function register(): void
     {
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         // Validate required fields
         $requiredFields = ['name', 'email', 'mobile', 'password', 'street', 'city', 'pincode'];
@@ -115,7 +115,7 @@ class ConsumerAuthController
      */
     public static function verifyOTP(): void
     {
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         $errors = Validator::required($data, ['email', 'otp']);
         if (!empty($errors)) {
@@ -134,7 +134,7 @@ class ConsumerAuthController
      */
     public static function login(): void
     {
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         $errors = Validator::required($data, ['email', 'password']);
         if (!empty($errors)) {
@@ -199,7 +199,7 @@ class ConsumerAuthController
      */
     public static function forgotPassword(): void
     {
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         $errors = Validator::required($data, ['email']);
         if (!empty($errors)) {
@@ -235,7 +235,7 @@ class ConsumerAuthController
      */
     public static function resetPassword(): void
     {
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         $errors = Validator::required($data, ['email', 'otp', 'new_password']);
         if (!empty($errors)) {
@@ -343,7 +343,7 @@ class ConsumerAuthController
             Response::error('Unauthorized', null, 401);
         }
 
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         try {
             $db = Database::getConnection();

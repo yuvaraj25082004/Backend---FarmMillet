@@ -66,7 +66,7 @@ class SHGController
             $db->beginTransaction();
 
             // Update supply status and assign logistics
-            $data = json_decode(file_get_contents('php://input'), true);
+            $data = json_decode(file_get_contents('php://input'), true) ?? [];
             $collectionBy = $data['collection_by'] ?? 'Logistics Partner';
             $collectionDate = $data['collection_date'] ?? date('Y-m-d', strtotime('+2 days'));
             $qualityGrade = isset($data['quality_grade']) ? strtoupper($data['quality_grade']) : 'A';
@@ -236,7 +236,7 @@ class SHGController
     public static function recordPayment(): void
     {
         $user = AuthMiddleware::shg();
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         $requiredFields = ['farmer_id', 'amount', 'payment_method'];
         $errors = Validator::required($data, $requiredFields);
@@ -304,7 +304,7 @@ class SHGController
     public static function createProduct(): void
     {
         $user = AuthMiddleware::shg();
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         $requiredFields = ['millet_type', 'quantity_kg', 'price_per_kg', 'quality_grade', 'packaging_date'];
         $errors = Validator::required($data, $requiredFields);
@@ -405,7 +405,7 @@ class SHGController
     public static function updateOrderStatus(int $orderId): void
     {
         $user = AuthMiddleware::shg();
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         $errors = Validator::required($data, ['status']);
 

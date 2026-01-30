@@ -15,7 +15,7 @@ class RazorpayController
     public static function createOrder(): void
     {
         $user = AuthMiddleware::authenticate();
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         $requiredFields = ['amount', 'order_id'];
         $errors = Validator::required($data, $requiredFields);
@@ -124,7 +124,7 @@ class RazorpayController
     public static function verifyPayment(): void
     {
         $user = AuthMiddleware::authenticate();
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         $requiredFields = ['razorpay_order_id', 'razorpay_payment_id', 'razorpay_signature'];
         $errors = Validator::required($data, $requiredFields);

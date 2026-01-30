@@ -15,7 +15,7 @@ class FarmerSupplyController
     public static function addSupply(): void
     {
         $user = AuthMiddleware::farmer();
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
         // Validate required fields
         $requiredFields = ['millet_type', 'quantity_kg', 'harvest_date', 'packaging_date', 'location'];
