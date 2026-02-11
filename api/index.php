@@ -26,6 +26,7 @@ set_error_handler(function($errno, $errstr, $errfile, $errline) {
     ]);
     exit;
 });
+<<<<<<< HEAD
 $method = $_SERVER['REQUEST_METHOD'];
 
 
@@ -37,6 +38,20 @@ $uri = str_replace($scriptDir, '', $uri);
 $parts = explode('/', trim($uri, '/'));
 
 
+=======
+
+// Get request method and URI
+$method = $_SERVER['REQUEST_METHOD'];
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+// Remove base path (adjust if needed)
+$basePath = '/Millets/api';
+$uri = str_replace($basePath, '', $uri);
+$uri = trim($uri, '/');
+
+// Split URI into parts
+$parts = explode('/', $uri);
+>>>>>>> 79dbae34229155f1c8d67de204c85df212678a23
 
 // Import controllers
 use App\Controllers\Auth\FarmerAuthController;
@@ -55,7 +70,11 @@ try {
     // ========================================
     
     // Farmer Auth
+<<<<<<< HEAD
     if (($parts[0] ?? null) === 'auth' && ($parts[1] ?? null) === 'farmer') {
+=======
+    if ($parts[0] === 'auth' && $parts[1] === 'farmer') {
+>>>>>>> 79dbae34229155f1c8d67de204c85df212678a23
         if ($method === 'POST' && $parts[2] === 'register') {
             FarmerAuthController::register();
         } elseif ($method === 'POST' && $parts[2] === 'verify-otp') {
@@ -106,6 +125,7 @@ try {
     // ========================================
     // FARMER ROUTES
     // ========================================
+<<<<<<< HEAD
 elseif ($parts[0] === 'farmer') {
 
     // /farmer/supply
@@ -139,12 +159,37 @@ elseif ($parts[0] === 'farmer') {
     }
 }
 
+=======
+    elseif ($parts[0] === 'farmer') {
+        if ($parts[1] === 'supply') {
+            if ($method === 'POST') {
+                FarmerSupplyController::addSupply();
+            } elseif ($method === 'GET') {
+                if (isset($parts[2]) && is_numeric($parts[2])) {
+                    FarmerSupplyController::getSupplyById((int)$parts[2]);
+                } else {
+                    FarmerSupplyController::getSupplies();
+                }
+            }
+        } elseif ($method === 'GET' && $parts[1] === 'payment-history') {
+            FarmerSupplyController::getPaymentHistory();
+        } elseif ($method === 'GET' && $parts[1] === 'sales-summary') {
+            FarmerSupplyController::getSalesSummary();
+        } elseif ($method === 'GET' && $parts[1] === 'dashboard') {
+            FarmerSupplyController::getSalesSummary();
+        }
+    }
+>>>>>>> 79dbae34229155f1c8d67de204c85df212678a23
     
     // ========================================
     // SHG ROUTES
     // ========================================
     elseif ($parts[0] === 'shg') {
+<<<<<<< HEAD
         if (($parts[1] ?? null) === 'supply') {
+=======
+        if ($parts[1] === 'supply') {
+>>>>>>> 79dbae34229155f1c8d67de204c85df212678a23
             if ($method === 'GET' && !isset($parts[2])) {
                 SHGController::viewSupplies();
             } elseif ($method === 'PUT' && $parts[2] === 'accept' && isset($parts[3])) {

@@ -143,7 +143,11 @@ class FarmerSupplyController
     }
 
     /**
+<<<<<<< HEAD
      * Get payment history (Receipt List)
+=======
+     * Get payment history
+>>>>>>> 79dbae34229155f1c8d67de204c85df212678a23
      */
     public static function getPaymentHistory(): void
     {
@@ -155,6 +159,7 @@ class FarmerSupplyController
             $stmt = $db->prepare("
                 SELECT 
                     p.*,
+<<<<<<< HEAD
                     s.organization_name as paid_by,
                     sup.millet_type
                 FROM payments p
@@ -163,6 +168,12 @@ class FarmerSupplyController
                 WHERE p.farmer_id = :farmer_id 
                 AND p.payment_type = 'farmer_payment' 
                 AND p.status = 'success'
+=======
+                    s.organization_name as paid_by
+                FROM payments p
+                LEFT JOIN shg_profiles s ON 1=1 AND s.user_id IS NOT NULL -- Placeholder for actual SHG who paid
+                WHERE p.farmer_id = :farmer_id AND p.payment_type = 'farmer_payment'
+>>>>>>> 79dbae34229155f1c8d67de204c85df212678a23
                 ORDER BY p.created_at DESC
             ");
 
@@ -177,6 +188,7 @@ class FarmerSupplyController
         }
     }
 
+<<<<<<< HEAD
     public static function ReceiptById(int $paymentId): void
     {
         $user = AuthMiddleware::farmer();
@@ -225,6 +237,8 @@ class FarmerSupplyController
     }
 
 
+=======
+>>>>>>> 79dbae34229155f1c8d67de204c85df212678a23
     /**
      * Get sales summary analytics
      */

@@ -238,7 +238,11 @@ class SHGController
         $user = AuthMiddleware::shg();
         $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
+<<<<<<< HEAD
         $requiredFields = ['farmer_id', 'amount', 'payment_method','supply_id'];
+=======
+        $requiredFields = ['farmer_id', 'amount', 'payment_method'];
+>>>>>>> 79dbae34229155f1c8d67de204c85df212678a23
         $errors = Validator::required($data, $requiredFields);
 
         if (isset($data['amount']) && (!is_numeric($data['amount']) || $data['amount'] <= 0)) {
@@ -255,17 +259,27 @@ class SHGController
 
             $stmt = $db->prepare("
                 INSERT INTO payments (
+<<<<<<< HEAD
                     farmer_id, payment_type, amount, status, payment_method,supply_id
                 ) VALUES (
                     :farmer_id, 'farmer_payment', :amount, 'success', :payment_method,:supply_id
+=======
+                    farmer_id, payment_type, amount, status, payment_method
+                ) VALUES (
+                    :farmer_id, 'farmer_payment', :amount, 'success', :payment_method
+>>>>>>> 79dbae34229155f1c8d67de204c85df212678a23
                 )
             ");
 
             $stmt->execute([
                 'farmer_id' => $data['farmer_id'],
                 'amount' => $data['amount'],
+<<<<<<< HEAD
                 'payment_method' => Validator::sanitize($data['payment_method']),
                 'supply_id' => $data['supply_id'] ?? null
+=======
+                'payment_method' => Validator::sanitize($data['payment_method'])
+>>>>>>> 79dbae34229155f1c8d67de204c85df212678a23
             ]);
             
             $paymentId = $db->lastInsertId();
@@ -274,13 +288,21 @@ class SHGController
             if (isset($data['supply_id'])) {
                 $stmt = $db->prepare("
                     UPDATE farmer_supplies 
+<<<<<<< HEAD
                     SET payment_status = 'paid', updated_at = NOW()
+=======
+                    SET payment_status = 'paid', updated_at = NOW() 
+>>>>>>> 79dbae34229155f1c8d67de204c85df212678a23
                     WHERE id = :id AND farmer_id = :farmer_id
                 ");
                 $stmt->execute([
                     'id' => $data['supply_id'],
+<<<<<<< HEAD
                     'farmer_id' => $data['farmer_id'],
                     
+=======
+                    'farmer_id' => $data['farmer_id']
+>>>>>>> 79dbae34229155f1c8d67de204c85df212678a23
                 ]);
             }
 
@@ -295,7 +317,11 @@ class SHGController
                 $db->rollBack();
             }
             error_log("Record payment failed: " . $e->getMessage());
+<<<<<<< HEAD
             Response::serverError('Failed to record payment: ' . $e->getMessage());
+=======
+            Response::serverError('Failed to record payment.');
+>>>>>>> 79dbae34229155f1c8d67de204c85df212678a23
         }
     }
 
