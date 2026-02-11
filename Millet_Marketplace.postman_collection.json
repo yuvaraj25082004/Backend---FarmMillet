@@ -1,0 +1,385 @@
+{
+    "info": {
+        "name": "Millet Marketplace API Check",
+        "description": "Complete API collection for Millet Supply Chain & Marketplace",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost/check/Millets1/api",
+            "type": "string"
+        },
+        {
+            "key": "farmer_token",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "shg_token",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "consumer_token",
+            "value": "",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "Farmer Auth",
+            "item": [
+                {
+                    "name": "Register Farmer",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "{{base_url}}/auth/farmer/register",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"John Farmer\",\n  \"email\": \"farmer@example.com\",\n  \"mobile\": \"9876543210\",\n  \"password\": \"Farmer@123\",\n  \"street\": \"123 Farm Street\",\n  \"city\": \"Bangalore\",\n  \"pincode\": \"560001\",\n  \"farm_location\": \"Village Farm Area\",\n  \"bank_account_number\": \"1234567890\",\n  \"bank_ifsc_code\": \"SBIN0001234\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Verify OTP",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "{{base_url}}/auth/farmer/verify-otp",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"farmer@example.com\",\n  \"otp\": \"123456\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Login Farmer",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "{{base_url}}/auth/farmer/login",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"farmer@example.com\",\n  \"password\": \"Farmer@123\"\n}"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Farmer Operations",
+            "item": [
+                {
+                    "name": "Add Supply",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{farmer_token}}"
+                            }
+                        ],
+                        "url": "{{base_url}}/farmer/supply",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"millet_type\": \"Foxtail Millet\",\n  \"quantity_kg\": 100,\n  \"quality_grade\": \"A\",\n  \"harvest_date\": \"2026-01-15\",\n  \"packaging_date\": \"2026-01-20\",\n  \"location\": \"Farm Location\",\n  \"collection_by\": \"ABC SHG\",\n  \"collection_date\": \"2026-01-25\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Get Supplies",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{farmer_token}}"
+                            }
+                        ],
+                        "url": "{{base_url}}/farmer/supply"
+                    }
+                },
+                {
+                    "name": "Payment History",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{farmer_token}}"
+                            }
+                        ],
+                        "url": "{{base_url}}/farmer/payment-history"
+                    }
+                },
+                {
+                    "name": "Sales Summary",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{farmer_token}}"
+                            }
+                        ],
+                        "url": "{{base_url}}/farmer/sales-summary"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "SHG Auth",
+            "item": [
+                {
+                    "name": "Register SHG",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "{{base_url}}/auth/shg/register",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"organization_name\": \"ABC Self Help Group\",\n  \"contact_person_name\": \"Jane Manager\",\n  \"email\": \"shg@example.com\",\n  \"mobile\": \"9876543211\",\n  \"password\": \"SHG@123\",\n  \"street\": \"456 Market Street\",\n  \"city\": \"Bangalore\",\n  \"pincode\": \"560002\",\n  \"warehouse_location\": \"Industrial Area\",\n  \"bank_account_number\": \"9876543210\",\n  \"bank_ifsc_code\": \"HDFC0001234\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Login SHG",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "{{base_url}}/auth/shg/login",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"shg@example.com\",\n  \"password\": \"SHG@123\"\n}"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "SHG Operations",
+            "item": [
+                {
+                    "name": "View All Supplies",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{shg_token}}"
+                            }
+                        ],
+                        "url": "{{base_url}}/shg/supply"
+                    }
+                },
+                {
+                    "name": "Accept Supply",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{shg_token}}"
+                            }
+                        ],
+                        "url": "{{base_url}}/shg/supply/accept/1"
+                    }
+                },
+                {
+                    "name": "Create Product",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{shg_token}}"
+                            }
+                        ],
+                        "url": "{{base_url}}/shg/product",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"supply_id\": 1,\n  \"millet_type\": \"Foxtail Millet\",\n  \"quantity_kg\": 50,\n  \"price_per_kg\": 80,\n  \"quality_grade\": \"A\",\n  \"packaging_date\": \"2026-01-20\",\n  \"source_farmer_name\": \"John Farmer\",\n  \"description\": \"Premium quality foxtail millet\"\n}"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Consumer Auth",
+            "item": [
+                {
+                    "name": "Register Consumer",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "{{base_url}}/auth/consumer/register",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Alice Consumer\",\n  \"email\": \"consumer@example.com\",\n  \"mobile\": \"9876543212\",\n  \"password\": \"Consumer@123\",\n  \"street\": \"789 Residential Street\",\n  \"city\": \"Bangalore\",\n  \"pincode\": \"560003\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Login Consumer",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "{{base_url}}/auth/consumer/login",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"consumer@example.com\",\n  \"password\": \"Consumer@123\"\n}"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Consumer Operations",
+            "item": [
+                {
+                    "name": "View Products",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{consumer_token}}"
+                            }
+                        ],
+                        "url": "{{base_url}}/consumer/products"
+                    }
+                },
+                {
+                    "name": "Place Order",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{consumer_token}}"
+                            }
+                        ],
+                        "url": "{{base_url}}/consumer/order",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"items\": [\n    {\n      \"product_id\": 1,\n      \"quantity_kg\": 10\n    }\n  ],\n  \"dropoff_location\": \"789 Residential Street, Bangalore\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Get My Orders",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{consumer_token}}"
+                            }
+                        ],
+                        "url": "{{base_url}}/consumer/orders"
+                    }
+                },
+                {
+                    "name": "Track Order",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{consumer_token}}"
+                            }
+                        ],
+                        "url": "{{base_url}}/consumer/orders/1/track"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Traceability",
+            "item": [
+                {
+                    "name": "Search by ID",
+                    "request": {
+                        "method": "GET",
+                        "url": "{{base_url}}/traceability/TR-2026-001"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Payments",
+            "item": [
+                {
+                    "name": "Create Razorpay Order",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{consumer_token}}"
+                            }
+                        ],
+                        "url": "{{base_url}}/payments/razorpay/create-order",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"order_id\": 1,\n  \"amount\": 800\n}"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
