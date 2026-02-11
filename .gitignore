@@ -3,7 +3,7 @@
 
 # Composer
 /vendor/
-composer.lock
+
 
 # Logs
 *.log
